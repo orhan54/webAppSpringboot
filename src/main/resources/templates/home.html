@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <div th:replace="~{fragments/header :: head}"></div>
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<div class="container special mt-4">
+    <h2 class="h2">Listes des users</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(listUsers)}">
+                <td colspan="3">Aucune personnes en base de données</td>
+            </tr>
+            <tr th:each="user: ${listUsers}">
+                <td th:text="${user.user_first_name}">Prénom</td>
+                <td th:text="${user.user_last_name}">Nom</td>
+                <td>
+                    <a th:href="@{/updateuser/{id_user}(id_user=${user.id_users})}"><button class="btn btn-info">Modifier</button></a>
+                    <a th:href="@{/deleteuser/{id_user}(id_user=${user.id_users})}"><button class="btn btn-danger">Supprimer</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
