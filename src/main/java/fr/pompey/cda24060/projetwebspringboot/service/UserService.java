@@ -13,24 +13,24 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUser(Integer id_user) {
+    public User getUser(Integer id_users) {
         // appel au repository
-        return  userRepository.getUser(id_user);
+        return  userRepository.getUser(id_users);
     }
 
     public Iterable<User> getAllUsers() {
         return userRepository.getUsers();
     }
 
-    public void deleteUser(final Integer id_user) {
-        userRepository.deleteUser(id_user);
+    public void deleteUser(final Integer id_users) {
+        userRepository.deleteUser(id_users);
     }
 
     public User saveUser(User user) {
         User saved;
         // System.out.println(person.toString());
         // Regle de gestion : Le nom de famille doit etre mis en majuscule.
-        user.setUser_last_name(user.getUser_last_name().toUpperCase());
+        user.setUserLastName(user.getUserLastName().toUpperCase());
 
         if(user.getId_users() == null) {
             // Si l'id est nul, alors c'est un nouvel employe.

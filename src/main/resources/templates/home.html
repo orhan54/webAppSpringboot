@@ -10,12 +10,18 @@
 
 <div class="container special mt-4">
     <h2 class="h2">Listes des users</h2>
+    
+    <div class="mb-3">
+        <a th:href="@{/createuser}"><button class="btn btn-success">Ajouter un utilisateur</button></a>
+    </div>
+    
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -23,17 +29,20 @@
                 <td colspan="3">Aucune personnes en base de données</td>
             </tr>
             <tr th:each="user: ${listUsers}">
-                <td th:text="${user.user_first_name}">Prénom</td>
-                <td th:text="${user.user_last_name}">Nom</td>
+                <td th:text="${user.userFirstName}">Prénom</td>
+                <td th:text="${user.userLastName}">Nom</td>
                 <td>
-                    <a th:href="@{/updateuser/{id_user}(id_user=${user.id_users})}"><button class="btn btn-info">Modifier</button></a>
-                    <a th:href="@{/deleteuser/{id_user}(id_user=${user.id_users})}"><button class="btn btn-danger">Supprimer</button></a>
+                    <a th:href="@{/updateuser/{id_users}(id_users=${user.id_users})}"><button class="btn btn-info">Modifier</button></a>
+                    <a th:href="@{/deleteuser/{id_users}(id_users=${user.id_users})}"><button class="btn btn-danger">Supprimer</button></a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<div th:replace="~{fragments/footer :: footer }"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
 
 </body>
 </html>
