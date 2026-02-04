@@ -32,19 +32,19 @@ public class UserController {
         return "createuser";
     }
 
-    @GetMapping("/updateuser/{id_users}")
-    public String updateUser(@PathVariable Integer id_users, Model model) {
-        User user = userService.getUser(id_users);
+    @GetMapping(value = {"/updateuser/{id_user}"})
+    public String updateuser(@PathVariable("id_user") final Integer id_user, Model model) {
+        User user = userService.getUser(id_user);
         model.addAttribute("user", user);
         return "updateuser";
     }
 
-    @GetMapping(value = {"/deleteuser/{id_users}"})
-    public ModelAndView deleteuser(@PathVariable("id_users") final Integer id_users) {
-        userService.deleteUser(id_users);
+    @GetMapping(value = {"/deleteuser/{id_user}"})
+    public ModelAndView deleteuser(@PathVariable("id_user") final Integer id_user) {
+        userService.deleteUser(id_user);
+        // redirection vers la page home
         return new ModelAndView("redirect:/");
     }
-
 
     @PostMapping(value = {"/saveuser"})
     public ModelAndView saveuser(@ModelAttribute User user) {

@@ -15,13 +15,13 @@
         <form method="post" th:action="@{/saveuser}" th:object="${user}">
             <div class="form-group">
                 <label for="firstNameInput">Prénom</label>
-                <input type="text" th:field="*{userFirstName}" class="form-control" id="firstNameInput"
+                <input type="text" th:field="*{user_first_name}" class="form-control" id="firstNameInput"
                        aria-describedby="firstNameHelp" placeholder="Saisir le prénom">
                 <small id="firstNameHelp" class="form-text text-muted">Merci d'écrire le prénom de la personne.</small>
             </div>
             <div class="form-group">
                 <label for="lastNameInput">Nom</label>
-                <input type="text" th:field="*{userLastName}" class="form-control" id="lastNameInput"
+                <input type="text" th:field="*{user_last_name}" class="form-control" id="lastNameInput"
                        aria-describedby="lastNameHelp" placeholder="Saisir le nom">
                 <small id="lastNameHelp" class="form-text text-muted">Merci d'écrire le nom de la personne.</small>
             </div>
