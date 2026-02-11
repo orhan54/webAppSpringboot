@@ -1,0 +1,53 @@
+# version 1.0 de mon docker-compose
+name: deploiement
+# lancement des services du docker-compose
+services:
+  # creation de l'image mysql avec variable et le ports
+  db:
+    image: mysql:8.3.0
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./infra/script.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: springboot
+
+  api:
+    image: orhan54/api2026
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/springboot
+    ports:
+      - "9000:8080"
+
+  # creation de l'image phpMyAdmin
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin:latest
+    ports:
+      - "9080:80"
+    restart: always
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: secure_password
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: orhan54/webimage:latest
+    depends_on:
+      - api
+    restart: on-failure
+    ports:
+      - "9001:8081"
+    environment:
+      - FR.POMPEY.CDA24060.PROJETWEBSPRINGBOOT.APIURL=http://api:8080
+
+volumes:
+  db_data:

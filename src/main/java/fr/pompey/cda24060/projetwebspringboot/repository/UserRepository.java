@@ -20,7 +20,7 @@ public class UserRepository {
     private CustomProperty customProperty;
 
     public Iterable<User> getUsers() {
-        // recupération de ma proprietes contenant l'url de l'API
+        // récupération de ma proprietes contenant l'url de l'API
         String baseURL = customProperty.getApiURL();
         // construction de l'url pour appel à l'API
         String getPersonsURL = baseURL + "/users";
@@ -57,13 +57,13 @@ public class UserRepository {
 
     public User updateUser(User user) {
         String baseApiURL = customProperty.getApiURL();
-        String updateUserURL = baseApiURL + "/users" + user.getId_users();
+        String updateUserURL = baseApiURL + "/users/" + user.getId_users();
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<User> request = new HttpEntity<>(user);
         ResponseEntity<User> response = restTemplate.exchange(
                 updateUserURL,
-                HttpMethod.GET,
+                HttpMethod.PUT,
                 request,
                 User.class);
 
